@@ -1,6 +1,6 @@
 import pandas as pd
 from model.input import Input
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
 le = LabelEncoder()
 
@@ -15,6 +15,7 @@ def  preprocess(df:pd.DataFrame)-> pd.DataFrame:
     df['SCC']= le.fit_transform(df['SCC'])
     df['CALC']= le.fit_transform(df['CALC'])
     df['MTRANS'] = le.fit_transform(df['MTRANS'])
+    
     return df
 
 def predict(prediction)-> str:
@@ -28,3 +29,7 @@ def predict(prediction)-> str:
         6: "Obesity_Type_III"
     }
     return prediction_map.get(prediction, "Invalid Prediction")
+
+def scaleData(df:pd.DataFrame)->pd.DataFrame:
+    scaler = MinMaxScaler(feature_range=(0,1))
+    return scaler.fit_transform(df)
