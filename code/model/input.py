@@ -15,5 +15,5 @@ class Input(BaseModel):
     SCC: str
     FAF: float
     TUE: float
-    CALC: float
+    CALC: str
     MTRANS: str
