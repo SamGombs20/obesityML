@@ -1,14 +1,14 @@
 import pandas as pd
-from model.input import Input
+from model.input import InputModel
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
 le = LabelEncoder()
 
-def generate_dataframe(data:Input):
-    return pd.DataFrame.from_dict(data.model_dump())
+def generate_dataframe(data:InputModel):
+    return pd.DataFrame([data.model_dump()])
 def  preprocess(df:pd.DataFrame)-> pd.DataFrame:
     df['Gender'] = le.fit_transform(df['Gender'])
-    df['family_history'] = le.fit_transform(df['family_history'])
+    df['family_history_with_overweight'] = le.fit_transform(df['family_history_with_overweight'])
     df['FAVC'] = le.fit_transform(df['FAVC'])
     df['CAEC'] = le.fit_transform(df['CAEC'])
     df['SMOKE'] = le.fit_transform(df['SMOKE'])

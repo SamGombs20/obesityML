@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 
-class Input(BaseModel):
-    gender: str
-    age: int
-    height: float
-    weight: float
-    family_history:str
+class InputModel(BaseModel):
+    Gender: str
+    Age: int
+    Height: float
+    Weight: float
+    family_history_with_overweight:str
     FAVC: str
     FCVC: float
     NCP: float

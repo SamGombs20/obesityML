@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from model.input import Input
+from model.input import InputModel
 from utils.common import generate_dataframe, preprocess,scaleData
 import pickle
 
@@ -11,7 +11,7 @@ with open ('/home/josh/projects/obesityML/code/rf_model.pkl','rb') as file:
 def root():
     return {"message": "Obesity Prediction"}
 @app.post("/predict")
-def predict(input:Input):
+def predict(input:InputModel):
     df = preprocess(generate_dataframe(input))
     scaled_data = scaleData(df)
     prediction = model.predict(scaled_data)
