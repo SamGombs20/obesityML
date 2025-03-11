@@ -18,7 +18,7 @@ def  preprocess(df:pd.DataFrame)-> pd.DataFrame:
     
     return df
 
-def predict(prediction)-> str:
+def predict(prediction:int)-> str:
     prediction_map = {
         0: "Insufficient_Weight",
         1: "Normal_Weight",
