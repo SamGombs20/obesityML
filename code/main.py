@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from model.input import InputModel
-from utils.common import generate_dataframe, preprocess,scaleData
+from utils.common import generate_dataframe, preprocess,scaleData,predict
 import pickle
 
 app = FastAPI()
@@ -15,8 +15,9 @@ def predict(input:InputModel):
     df = preprocess(generate_dataframe(input))
     scaled_data = scaleData(df)
     prediction = model.predict(scaled_data)
+    
 
-    return {"Prediction":prediction}
+    return {"Prediction":str(prediction[0])}
     
 
 
