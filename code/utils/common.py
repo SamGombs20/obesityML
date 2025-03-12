@@ -2,15 +2,15 @@ import pandas as pd
 from model.input import InputModel
 import joblib
 
-le = joblib.load("labelEncoder.pkl")
+le = joblib.load("../labelEncoder.pkl")
 scaler = joblib.load("../data/scaler.pkl")
 
 def generate_dataframe(data:InputModel):
     return pd.DataFrame([data.model_dump()])
 def  preprocess(df:pd.DataFrame)-> pd.DataFrame:
-    df['Gender'] = le.fit_transform(df['Gender'])
+    df['Gender'] = le.transform(df['Gender'])
     df['family_history_with_overweight'] = le.fit_transform(df['family_history_with_overweight'])
-    df['FAVC'] = le.fit_transform(df['FAVC'])
+    df['FAVC'] = le.transform(df['FAVC'])
     df['CAEC'] = le.fit_transform(df['CAEC'])
     df['SMOKE'] = le.fit_transform(df['SMOKE'])
     df['SCC']= le.fit_transform(df['SCC'])
