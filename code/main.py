@@ -6,9 +6,8 @@ import joblib
 
 app = FastAPI()
 
-model_path = os.path.abspath("../data/rf_model.pkl")
 
-model = joblib.load("../data/rf_model.pkl")
+model = joblib.load("../data/model.pkl")
 @app.get("/")
 def root():
     return {"message": "Obesity Prediction"}

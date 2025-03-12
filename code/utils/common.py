@@ -2,8 +2,9 @@ import pandas as pd
 from model.input import InputModel
 import joblib
 
-encoder = joblib.load("../encoder.pkl")
-scaler = joblib.load("../scaler.pkl")
+
+encoder = joblib.load("../../data/encoder.pkl")
+scaler = joblib.load("../../data/scaler.pkl")
 
 def generate_dataframe(data:InputModel):
     return pd.DataFrame([data.model_dump()])
