@@ -7,7 +7,7 @@ import joblib
 app = FastAPI()
 
 
-model = joblib.load("../data/model.pkl")
+model = joblib.load("model.pkl")
 @app.get("/")
 def root():
     return {"message": "Obesity Prediction"}

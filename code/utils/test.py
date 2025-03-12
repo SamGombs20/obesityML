@@ -1,3 +1,5 @@
 import os
-print(os.path.abspath("../../data/encoder.pkl"))
-print(os.path.exists("../../data/encoder.pkl")) 
+print(os.path.abspath("/code/encoder.pkl"))
+
+
+print(os.path.exists("../obesityMLencoder.pkl")) 
