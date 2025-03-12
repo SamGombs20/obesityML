@@ -1,12 +1,14 @@
 from fastapi import FastAPI
+import os
 from model.input import InputModel
 from utils.common import generate_dataframe, preprocess,scaleData,predict as pred
-import pickle
+import joblib
 
 app = FastAPI()
 
-with open ('/home/josh/projects/obesityML/code/rf_model.pkl','rb') as file:
-    model = pickle.load(file)
+model_path = os.path.abspath("../data/rf_model.pkl")
+
+model = joblib.load("../data/rf_model.pkl")
 @app.get("/")
 def root():
     return {"message": "Obesity Prediction"}

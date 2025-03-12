@@ -1,8 +1,9 @@
 import pandas as pd
 from model.input import InputModel
-from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+import joblib
 
-le = LabelEncoder()
+le = joblib.load("labelEncoder.pkl")
+scaler = joblib.load("../data/scaler.pkl")
 
 def generate_dataframe(data:InputModel):
     return pd.DataFrame([data.model_dump()])
@@ -31,5 +32,5 @@ def predict(prediction:int)-> str:
     return prediction_map.get(prediction, "Invalid Prediction")
 
 def scaleData(df:pd.DataFrame)->pd.DataFrame:
-    scaler = MinMaxScaler(feature_range=(0,1))
+    
     return scaler.fit_transform(df)
