@@ -8,7 +8,7 @@ import joblib
 def generate_dataframe(data:InputModel):
     return pd.DataFrame([data.model_dump()])
 def  preprocess(df:pd.DataFrame)-> pd.DataFrame:
-    encoder = joblib.load("../encoder.pkl")
+    encoder = joblib.load("/home/josh/projects/obesityML/code/encoder.pkl")
     #Binary encoding for binary data
     binary_features = ["family_history_with_overweight", "FAVC", "SMOKE", "SCC"]
     df[binary_features] = df[binary_features].replace({"yes":1, "no":0})
@@ -37,7 +37,7 @@ def predict(prediction:int)-> str:
 
 def scaleData(df:pd.DataFrame)->pd.DataFrame:
     
-    scaler = joblib.load("../scaler.pkl")
+    scaler = joblib.load("/home/josh/projects/obesityML/code/scaler.pkl")
     continuous_features = ["Age", "Height", "Weight", "NCP", "CH2O", "FAF"]
     df1 = df
     df1[continuous_features] = scaler.transform(df1[continuous_features])

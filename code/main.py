@@ -4,7 +4,7 @@ from model.input import InputModel
 from utils.common import generate_dataframe, preprocess,scaleData,predict as pred
 import joblib
 
-model = joblib.load(os.path.abspath("/code/model.pkl"))
+model = joblib.load("/home/josh/projects/obesityML/code/model.pkl")
 app = FastAPI()
 
 
