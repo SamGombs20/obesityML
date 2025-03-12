@@ -4,10 +4,11 @@ from model.input import InputModel
 from utils.common import generate_dataframe, preprocess,scaleData,predict as pred
 import joblib
 
+model = joblib.load(os.path.abspath("/code/model.pkl"))
 app = FastAPI()
 
 
-model = joblib.load("model.pkl")
+
 @app.get("/")
 def root():
     return {"message": "Obesity Prediction"}
@@ -15,6 +16,7 @@ def root():
 def predict(input:InputModel):
     df = preprocess(generate_dataframe(input))
     scaled_data = scaleData(df)
+    
     prediction = model.predict(scaled_data)
     
     return {"Prediction":pred(prediction[0])}
