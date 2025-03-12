@@ -2,20 +2,23 @@ import pandas as pd
 from model.input import InputModel
 import joblib
 
-le = joblib.load("../labelEncoder.pkl")
-scaler = joblib.load("../data/scaler.pkl")
+encoder = joblib.load("../encoder.pkl")
+scaler = joblib.load("../scaler.pkl")
 
 def generate_dataframe(data:InputModel):
     return pd.DataFrame([data.model_dump()])
 def  preprocess(df:pd.DataFrame)-> pd.DataFrame:
-    df['Gender'] = le.transform(df['Gender'])
-    df['family_history_with_overweight'] = le.fit_transform(df['family_history_with_overweight'])
-    df['FAVC'] = le.transform(df['FAVC'])
-    df['CAEC'] = le.fit_transform(df['CAEC'])
-    df['SMOKE'] = le.fit_transform(df['SMOKE'])
-    df['SCC']= le.fit_transform(df['SCC'])
-    df['CALC']= le.fit_transform(df['CALC'])
-    df['MTRANS'] = le.fit_transform(df['MTRANS'])
+    #Binary encoding for binary data
+    binary_features = ["family_history_with_overweight", "FAVC", "SMOKE", "SCC"]
+    df[binary_features] = df[binary_features].replace({"yes":1, "no":0})
+
+    #One-Hot encoding for categorical features
+    categorical_features = ["Gender", "CAEC", "CALC", "MTRANS"]
+    encoded_cats = encoder.transform(df[categorical_features])
+    encoded_cat_df = pd.DataFrame(encoded_cats, columns=encoder.get_feature_names_out(categorical_features))
+
+    df = df.drop(columns=df[categorical_features])
+    df = pd.concat([df,encoded_cat_df], axis=1)
     
     return df
 
@@ -32,5 +35,8 @@ def predict(prediction:int)-> str:
     return prediction_map.get(prediction, "Invalid Prediction")
 
 def scaleData(df:pd.DataFrame)->pd.DataFrame:
-    
-    return scaler.fit_transform(df)
+    continuous_features = ["Age", "Height", "Weight", "NCP", "CH2O", "FAF"]
+    df1 = df
+    df1[continuous_features] = scaler.transform(df1[continuous_features])
+
+    return df1
