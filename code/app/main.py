@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 #Load the model once
 try:
-    model = joblib.load("/home/josh/projects/obesityML/code/model.pkl")
+    model = joblib.load("/home/josh/projects/obesityML/code/app/model.pkl")
 except Exception as e:
     raise RuntimeError(f"Failed to load the model: {e}")
 app = FastAPI()
@@ -41,6 +41,6 @@ def predict(input:InputModel):
         raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
 
 
-# if __name__ == "__main__":
-#     import uvicorn
-#     uvicorn.run("main:app", reload=True)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", reload=True)

@@ -5,8 +5,8 @@ import joblib
 
 #Load the encoder and scaler once
 try:
-    encoder = joblib.load("/home/josh/projects/obesityML/code/encoder.pkl")
-    scaler = joblib.load("/home/josh/projects/obesityML/code/scaler.pkl")
+    encoder = joblib.load("/home/josh/projects/obesityML/code/app/encoder.pkl")
+    scaler = joblib.load("/home/josh/projects/obesityML/code/app/scaler.pkl")
 except Exception as e:
     raise RuntimeError(f"Failed to load encoder or scaler: {e}")
 
