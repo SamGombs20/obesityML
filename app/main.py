@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 #Load the model once
 try:
-    model = joblib.load("/home/josh/projects/obesityML/code/app/model.pkl")
+    model = joblib.load("/home/josh/projects/obesityML/app/model.pkl")
 except Exception as e:
     raise RuntimeError(f"Failed to load the model: {e}")
 app = FastAPI()
