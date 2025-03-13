@@ -3,6 +3,11 @@ import logging
 from model.input import InputModel
 from utils.common import generate_dataframe, preprocess,scaleData,predict as pred
 import joblib
+import os
+
+# Get the current directory of the script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(BASE_DIR, "../models")
 
 #configure logging
 logging.basicConfig(level=logging.INFO)
@@ -10,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 #Load the model once
 try:
-    model = joblib.load("/home/josh/projects/obesityML/app/model.pkl")
+    model = joblib.load(os.path.join(MODELS_DIR,"model.pkl"))
 except Exception as e:
     raise RuntimeError(f"Failed to load the model: {e}")
 app = FastAPI()

@@ -1,12 +1,16 @@
 import pandas as pd
 from model.input import InputModel
 import joblib
+import os
 
+# Get the current directory of the script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(BASE_DIR, "../models")
 
 #Load the encoder and scaler once
 try:
-    encoder = joblib.load("/home/josh/projects/obesityML/app/encoder.pkl")
-    scaler = joblib.load("/home/josh/projects/obesityML/app/scaler.pkl")
+    encoder = joblib.load(os.path.join(MODELS_DIR, "encoder.pkl"))
+    scaler = joblib.load(os.path.join(MODELS_DIR, "scaler.pkl"))
 except Exception as e:
     raise RuntimeError(f"Failed to load encoder or scaler: {e}")
 
