@@ -7,7 +7,7 @@ import os
 
 # Get the current directory of the script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODELS_DIR = os.path.join(BASE_DIR, "../models")
+MODELS_DIR = os.path.join(BASE_DIR, "models")
 
 #configure logging
 logging.basicConfig(level=logging.INFO)
