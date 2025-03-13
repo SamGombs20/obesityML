@@ -41,6 +41,6 @@ def predict(input:InputModel):
         raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", reload=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", reload=True)
