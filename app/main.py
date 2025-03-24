@@ -42,7 +42,7 @@ def predict(input:InputModel):
     
         prediction = model.predict(scaled_data)
         logger.info(f"Prediction result : {prediction[0]}")
-        return pred(prediction[0])
+        return {"Prediction":pred(prediction[0])}
     except ValueError as e:
         logger.info(f"Value error: {e}")
         raise HTTPException(status_code=400, detail=str(e))
