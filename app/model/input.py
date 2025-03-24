@@ -18,3 +18,6 @@ class InputModel(BaseModel):
     TUE: float
     CALC: Literal["no", "Sometimes", "Frequently", "Always"]
     MTRANS: Literal["Public_Transportation", "Automobile", "Walking", "Motorbike", "Bike"]
+
+class PredictionModel(BaseModel):
+    prediction:str
