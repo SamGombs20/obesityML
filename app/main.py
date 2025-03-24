@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import logging
 from model.input import InputModel
 from utils.common import generate_dataframe, preprocess,scaleData,predict as pred
@@ -20,6 +21,13 @@ except Exception as e:
     raise RuntimeError(f"Failed to load the model: {e}")
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace "*" with your specific domain for security
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
