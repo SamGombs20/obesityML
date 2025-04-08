@@ -66,7 +66,7 @@ def get_recommendation(input_data:InputModel)->str:
     #Eating Habits
     if input_data.FAVC =="yes":
         recommendations.append("Try to limit frequent consumption of high-calorie foods and opt for healthier alternatives.")
-    if input_data.FAVC<2.5:
+    if input_data.FCVC<2.5:
         recommendations.append("Increase your vegetable consumption for essential nutrients and fiber.")
     if input_data.NCP < 3:
         recommendations.append("Consider eating small, balanced meals throughout the day to maintain energy levels.")
