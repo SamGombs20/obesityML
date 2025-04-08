@@ -57,7 +57,7 @@ def predict(input:InputModel):
 def recommendation(obesity_level:str):
     try:
         recommendation_text = get_recommendation(obesity_level)
-        return RecommendationModel(obesity_level=obesity_level)
+        return RecommendationModel(recommendation=recommendation_text)
     except Exception as e:
         logger.error(f"Unexpected exception: {e}")
 
