@@ -21,3 +21,6 @@ class InputModel(BaseModel):
 
 class PredictionModel(BaseModel):
     prediction:str
+
+class RecommendationModel(BaseModel):
+    recommendation:str

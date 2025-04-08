@@ -52,3 +52,16 @@ def scaleData(df:pd.DataFrame)->pd.DataFrame:
     df1[continuous_features] = scaler.transform(df1[continuous_features])
 
     return df1
+
+#Recommendation Logic
+def get_recommendation(obesity_level:str)->str:
+    recommendations = {
+        "Insufficient_Weight": "Increase calorie intake with nutrient-dense foods, focus on protein and healthy fats, and consider strength training.",
+        "Normal_Weight": "Maintain a balanced diet and regular physical activity to sustain health.",
+        "Overweight_Level_I": "Slight calorie reduction, increase daily activity (e.g., walking, cardio exercises).",
+        "Overweight_Level_II": "Adopt a structured meal plan, reduce processed food intake, and increase exercise intensity.",
+        "Obesity_Type_I": "Engage in moderate-intensity workouts, track calorie intake, and focus on portion control.",
+        "Obesity_Type_II": "Consider a personalized diet plan, increase fiber intake, and engage in regular aerobic exercises.",
+        "Obesity_Type_III": "Consult a healthcare provider for a structured weight management plan, focus on gradual lifestyle changes, and possibly consider medical interventions if necessary."
+    }
+    return recommendations.get(obesity_level, "No recommendation available.")

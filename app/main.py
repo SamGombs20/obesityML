@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-from model.input import InputModel, PredictionModel
-from utils.common import generate_dataframe, preprocess,scaleData,predict as pred
+from model.input import InputModel, PredictionModel, RecommendationModel
+from utils.common import generate_dataframe, preprocess,scaleData,predict as pred, get_recommendation
 import joblib
 import os
 
@@ -53,6 +53,13 @@ def predict(input:InputModel):
         logger.info(f"Unexpected exception: {e}")
         raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
 
+@app.get("/recommendation", response_model=RecommendationModel)
+def recommendation(obesity_level:str):
+    try:
+        recommendation_text = get_recommendation(obesity_level)
+        return RecommendationModel(obesity_level=obesity_level)
+    except Exception as e:
+        logger.error(f"Unexpected exception: {e}")
 
 # if __name__ == "__main__":
 #     import uvicorn
