@@ -54,14 +54,37 @@ def scaleData(df:pd.DataFrame)->pd.DataFrame:
     return df1
 
 #Recommendation Logic
-def get_recommendation(obesity_level:str)->str:
-    recommendations = {
-        "Insufficient_Weight": "Increase calorie intake with nutrient-dense foods, focus on protein and healthy fats, and consider strength training.",
-        "Normal_Weight": "Maintain a balanced diet and regular physical activity to sustain health.",
-        "Overweight_Level_I": "Slight calorie reduction, increase daily activity (e.g., walking, cardio exercises).",
-        "Overweight_Level_II": "Adopt a structured meal plan, reduce processed food intake, and increase exercise intensity.",
-        "Obesity_Type_I": "Engage in moderate-intensity workouts, track calorie intake, and focus on portion control.",
-        "Obesity_Type_II": "Consider a personalized diet plan, increase fiber intake, and engage in regular aerobic exercises.",
-        "Obesity_Type_III": "Consult a healthcare provider for a structured weight management plan, focus on gradual lifestyle changes, and possibly consider medical interventions if necessary."
-    }
-    return recommendations.get(obesity_level, "No recommendation available.")
+def get_recommendation(input_data:InputModel)->str:
+    recommendations =[]
+    #Weight Analysis (BMI Calculation)
+    bmi = input_data.Weight/(input_data.Height **2)
+    if bmi<18.5:
+        recommendations.append("Increase your calorie intake with nutrient-rich foods like avocados, nuts, and lean proteins.")
+    elif bmi>=25:
+        recommendations.append("Focus on a balanced diet with portion control and reduce high-calorie foods.")
+    
+    #Eating Habits
+    if input_data.FAVC =="yes":
+        recommendations.append("Try to limit frequent consumption of high-calorie foods and opt for healthier alternatives.")
+    if input_data.FAVC<2.5:
+        recommendations.append("Increase your vegetable consumption for essential nutrients and fiber.")
+    if input_data.NCP < 3:
+        recommendations.append("Consider eating small, balanced meals throughout the day to maintain energy levels.")
+    # Hydration
+    if input_data.CH2O < 2:
+        recommendations.append("Drink at least 2 liters of water daily to stay hydrated and support metabolism.")
+
+    # Exercise
+    if input_data.FAF == 0:
+        recommendations.append("Increase physical activity with at least 30 minutes of exercise per day.")
+    elif input_data.FAF < 2:
+        recommendations.append("Try to add more movement into your daily routine, such as taking the stairs or walking more.")
+
+    # Alcohol & Smoking
+    if input_data.CALC in ["Frequently", "Always"]:
+        recommendations.append("Consider reducing alcohol consumption as it can contribute to weight gain.")
+    if input_data.SMOKE == "yes":
+        recommendations.append("Avoid smoking for better overall health and improved metabolism.")
+
+    return " ".join(recommendations) if recommendations else "Maintain your current healthy habits!"
+

@@ -53,10 +53,10 @@ def predict(input:InputModel):
         logger.info(f"Unexpected exception: {e}")
         raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
 
-@app.get("/recommendation", response_model=RecommendationModel)
-def recommendation(obesity_level:str):
+@app.post("/recommendation", response_model=RecommendationModel)
+def recommendation(input:InputModel):
     try:
-        recommendation_text = get_recommendation(obesity_level)
+        recommendation_text = get_recommendation(input)
         return RecommendationModel(recommendation=recommendation_text)
     except Exception as e:
         logger.error(f"Unexpected exception: {e}")
